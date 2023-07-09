@@ -1,0 +1,52 @@
+<!-- 
+  Sorting Visualizer
+  Daniel Coimbra Salomão 7/5/2023
+-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sort Visualizer</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+  <script src="./script.js" defer></script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="bars_container" id="bars_container"></div>
+
+    <div class="buttons_container">
+      <!-- <label for="slider">Array Size:</label> -->
+      <span id="sliderValue" class="slider-value">50</span>
+      <input type="range" id="slider" min="50" max="150" step="5" value="50" />
+
+      <select name="" id="speed">
+        <option class="option" value="100">Slow</option>
+        <option class="option" value="50">Medium</option>
+        <option class="option" value="10">Fast</option>
+      </select>
+      <select name="" id="algo">
+        <option class="option" value="bubble">Bubble Sort</option>
+        <option class="option" value="insertion">Insertion Sort</option>
+        <option class="option" value="heap">Heap Sort</option>
+        <option class="option" value="merge">Merge Sort</option>
+        <option class="option" value="quick">Quick Sort</option>
+        <option class="option" value="selection">Selection Sort</option>
+        <option class="option" value="bucket">Bucket Sort</option>
+
+      </select>
+      <button id="randomize_array_btn">Randomize Array</button>
+      <button id="sort_btn">Sort</button>
+    </div>
+  </div>
+
+  <script src="index.js"></script>
+</body>
+
+</html>
