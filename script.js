@@ -39,8 +39,8 @@ function createRandomArray() {
   while (array.length < numOfBars) {
     var randomInt = randomNum(minRange, maxRange);
     if (!array.includes(randomInt)) {
-        array.push(randomInt);
-      }
+      array.push(randomInt);
+    }
   }
 
   return array;
@@ -73,7 +73,7 @@ function sleep(ms) {
 
 async function bubbleSort(array) {
   let bars = document.getElementsByClassName("bar");
-  
+
   for (let i = 0; i < array.length; i++) {
     for (let j = 0; j < array.length - i - 1; j++) {
       if (array[j] > array[j + 1]) {
@@ -97,9 +97,9 @@ async function bubbleSort(array) {
     await sleep(speedFactor);
   }
   for (let i = 0; i < bars.length; i++) {
-    bars[i].style.backgroundColor="red";
+    bars[i].style.backgroundColor = "red";
     await sleep(speedFactor);
-    bars[i].style.backgroundColor="white";
+    bars[i].style.backgroundColor = "white";
   }
   return array;
 }
@@ -359,103 +359,103 @@ function mergeSortD(arr, start, end) {
 }
 
 async function SelectionSort(array) {
-    let bars = document.getElementsByClassName("bar");
-    for (let i = 0; i < array.length - 1; i++) {
-      let minIndex = i;
+  let bars = document.getElementsByClassName("bar");
+  for (let i = 0; i < array.length - 1; i++) {
+    let minIndex = i;
+    await sleep(speedFactor);
+
+    for (let j = i + 1; j < array.length; j++) {
+      bars[j].style.backgroundColor = "red";
       await sleep(speedFactor);
-  
-      for (let j = i + 1; j < array.length; j++) {
-        bars[j].style.backgroundColor = "red";
-        await sleep(speedFactor);
-  
-        if (array[j] < array[minIndex]) {
-          if (minIndex !== i) {
-            bars[minIndex].style.backgroundColor = "white";
-          }
-          minIndex = j;
-          bars[minIndex].style.backgroundColor = "red";
-        } else {
-          bars[j].style.backgroundColor = "white";
+
+      if (array[j] < array[minIndex]) {
+        if (minIndex !== i) {
+          bars[minIndex].style.backgroundColor = "white";
         }
+        minIndex = j;
+        bars[minIndex].style.backgroundColor = "red";
+      } else {
+        bars[j].style.backgroundColor = "white";
       }
-  
-      if (minIndex !== i) {
-        // Swap the elements
-        let temp = array[i];
-        array[i] = array[minIndex];
-        array[minIndex] = temp;
-  
-        // Update the heights of bars and visualize the swap
-        bars[i].style.height = array[i] * heightFactor + "px";
-        bars[minIndex].style.height = array[minIndex] * heightFactor + "px";
-        await sleep(speedFactor);
-      }
-  
-      bars[i].style.backgroundColor = "white";
     }
-  
-    bars[array.length - 1].style.backgroundColor = "white";
-    return array;
-  }
 
-  async function bs(array) {
-    const bar = document.getElementsByClassName("bar");
+    if (minIndex !== i) {
+      // Swap the elements
+      let temp = array[i];
+      array[i] = array[minIndex];
+      array[minIndex] = temp;
 
-    const bucketCount = 10; // Number of buckets
-    let maxValue = Math.max(...array);
-    let minValue = Math.min(...array);
-    
-    // Create buckets as empty arrays
-    const buckets = Array.from({ length: bucketCount }, () => []);
-    
-    const range = (maxValue - minValue + 1) / bucketCount;
-    
-    // Distribute the elements into buckets
-    for (let i = 0; i < array.length; i++) {
-      const value = array[i];
-      bar[i].style.backgroundColor = "red";
-      const bucketIndex = Math.floor((value - minValue) / range);
-      buckets[bucketIndex].push(value);
+      // Update the heights of bars and visualize the swap
+      bars[i].style.height = array[i] * heightFactor + "px";
+      bars[minIndex].style.height = array[minIndex] * heightFactor + "px";
       await sleep(speedFactor);
-      bar[i].style.backgroundColor = "white";
-
     }
 
-    
-    // Sort each bucket
-    for (let i = 0; i < 10; i++) {
-        let bucket = buckets[i];
-        for (let j = 1; j < bucket.length; j++) {
-          let key = bucket[j];
-          let k = j - 1;
-          while (k >= 0 && bucket[k] > key) {
-            bucket[k + 1] = bucket[k];
-            k--;
-          }
-          bucket[k + 1] = key;
-        }
+    bars[i].style.backgroundColor = "white";
+  }
+
+  bars[array.length - 1].style.backgroundColor = "white";
+  return array;
+}
+
+async function bs(array) {
+  const bar = document.getElementsByClassName("bar");
+
+  const bucketCount = 10; // Number of buckets
+  let maxValue = Math.max(...array);
+  let minValue = Math.min(...array);
+
+  // Create buckets as empty arrays
+  const buckets = Array.from({ length: bucketCount }, () => []);
+
+  const range = (maxValue - minValue + 1) / bucketCount;
+
+  // Distribute the elements into buckets
+  for (let i = 0; i < array.length; i++) {
+    const value = array[i];
+    bar[i].style.backgroundColor = "red";
+    const bucketIndex = Math.floor((value - minValue) / range);
+    buckets[bucketIndex].push(value);
+    await sleep(speedFactor);
+    bar[i].style.backgroundColor = "white";
+
+  }
+
+
+  // Sort each bucket
+  for (let i = 0; i < 10; i++) {
+    let bucket = buckets[i];
+    for (let j = 1; j < bucket.length; j++) {
+      let key = bucket[j];
+      let k = j - 1;
+      while (k >= 0 && bucket[k] > key) {
+        bucket[k + 1] = bucket[k];
+        k--;
       }
-    var l = 0;
-    for (let i = 0; i < buckets.length; i++) {
-      fix(buckets[i], l);
-      l+=buckets[i].length;
+      bucket[k + 1] = key;
     }
+  }
+  var l = 0;
+  for (let i = 0; i < buckets.length; i++) {
+    fix(buckets[i], l);
+    l += buckets[i].length;
+  }
+
+}
+async function fix(bucket, f) {
+  const bar = document.getElementsByClassName("bar");
+  for (let j = 0; j < bucket.length; j++) {
+    const value = bucket[j];
+    bar[f + j].style.height = value * heightFactor + "px";
+    bar[f + j].style.backgroundColor = "red";
+    await sleep(speedFactor);
+    bar[f + j].style.backgroundColor = "white";
 
   }
-  async function fix(bucket, f) {
-    const bar = document.getElementsByClassName("bar");
-    for (let j = 0; j < bucket.length; j++) {
-      const value = bucket[j];
-      bar[f+j].style.height = value*heightFactor + "px";
-      bar[f+j].style.backgroundColor = "red";
-      await sleep(speedFactor);
-      bar[f+j].style.backgroundColor = "white";
 
-    }
+}
 
-  }
-  
-  
+
 sort_btn.addEventListener("click", function () {
   switch (algotouse) {
     case "bubble":
